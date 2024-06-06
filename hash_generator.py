@@ -15,13 +15,13 @@ class HashGenerator:
         return sub_keys
 
     def generate_salt(n):
-        key1 = ""
+        salt = ""
 
         for i in range(n):
             temp = str(random.randint(0, 1))
-            key1 += temp
+            salt += temp
 
-        return key1
+        return salt
 
     def generate(plaintext, salt=None, work_factor=40):
         if salt == None:
