@@ -19,9 +19,11 @@ class Sbox:
     def generate_sbox():
         sboxes = []
 
-        tables = open(Sbox.sbox_path).readlines()
-        for table in HashGenerator.chunk(tables, Sbox.rows_num + 2):
+        sboxes_file = open(Sbox.sbox_path, "r")
+        for table in HashGenerator.chunk(sboxes_file.readlines(), Sbox.rows_num + 2):
             sboxes.append(Sbox([line.split() for line in table[1:-1]]))
+
+        sboxes_file.close()
 
         return sboxes
 
@@ -38,6 +40,9 @@ class HashGenerator:
 
     def get_binary(hex_string):
         return bin(int(hex_string, 16))[2:].zfill(len(hex_string[2:]) * 4)
+
+    def get_hex(binary_string):
+        return hex(int(binary_string, 2))
 
     def add(p, k, size=32, mod=2**32):
         addition = int(p, 2) + int(k, 2)
@@ -75,13 +80,17 @@ class HashGenerator:
 
     def keygen():
         sub_keys = []
-        for line in open(HashGenerator.sub_keys_path).readlines()[1:-1]:
+        sub_keys_file = open(HashGenerator.sub_keys_path, "r")
+        for line in sub_keys_file.readlines()[1:-1]:
             sub_keys.extend(
                 [
                     HashGenerator.get_binary(sub_key.strip()[:-1])
                     for sub_key in line.split(",")[:-1]
                 ]
             )
+
+        sub_keys_file.close()
+
         return sub_keys
 
     def generate_salt(n):
@@ -131,7 +140,7 @@ class HashGenerator:
 
         return HashGenerator.last_round(final_round, sub_keys[30], sub_keys[31])
 
-    def generate(plaintext, salt=None, work_factor=40):
+    def generate(plaintext, salt=None, work_factor=8):
         plaintext = HashGenerator.padding(HashGenerator.get_binary(plaintext))
         if len(plaintext) > HashGenerator.block_length:
             print(f"Your plaintext longer than {HashGenerator.block_length} bit!")
@@ -154,12 +163,11 @@ class HashGenerator:
                 salt, HashGenerator.generate_box(final_hash, sub_keys, sboxes), 64
             )
 
-        return final_hash
+        return HashGenerator.get_hex(final_hash)
 
 
-plaintext = "0x000000000"
-salt = "0x701309b2b76e6e2d"
-work_factor = 1
+plaintext = "0xa0a35e8ca7710"
+salt = "0xd62af4866aafe96e"
+work_factor = 13
 
 print(HashGenerator.generate(plaintext, salt=salt, work_factor=work_factor))
-print(HashGenerator.padding(HashGenerator.get_binary("0x13cac2db8d45d664")))
