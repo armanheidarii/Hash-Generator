@@ -31,3 +31,8 @@ At the first level of abstraction, 2<sup>work_factor</sup> number of <b>Box</b> 
 
 
 At the second level of abstraction, each Box component is composed of other components called <b>Round</b> and <b>LastRound</b>, where the Round component is executed 32 times, and in each step, the output of the previous step is the input to the next step. Finally, the output of the 32nd Round is the input to the LastRound.
+
+
+At the third level of abstraction, each Round component is composed of a combination of XOR and modular addition of two halves of its 64-bit input, and ultimately, with the help of the <b>W</b> component, it can produce the output of the Round component.
+Additionally, the LastRound component is also composed of a permutation of the two halves of its 64-bit input using the XOR and addition operators.
+
