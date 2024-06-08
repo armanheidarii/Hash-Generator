@@ -27,7 +27,7 @@ python tests/test.py
 ## Description
 The implemented hash algorithm is composed of several layers of abstraction:
 
-At the first level of abstraction, 2<sup>work_factor</sup> number of Box components are executed, and in each step, the XOR of the salt and the output of the previous step is the input to the next step.
+At the first level of abstraction, 2<sup>work_factor</sup> number of <b>Box</b> components are executed, and in each step, the XOR of the salt and the output of the previous step is the input to the next step.
 
 
-At the second level of abstraction, each <b>Box</b> component is composed of other components called Round and LastRound, where the Round component is executed 32 times, and in each step, the output of the previous step is the input to the next step. Finally, the output of the 32nd Round is the input to the LastRound.
+At the second level of abstraction, each Box component is composed of other components called <b>Round</b> and <b>LastRound</b>, where the Round component is executed 32 times, and in each step, the output of the previous step is the input to the next step. Finally, the output of the 32nd Round is the input to the LastRound.
