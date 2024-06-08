@@ -7,12 +7,12 @@
 ## Contents
 
 - [Introduction](#introduction)
-- [Description](#description)
 - [Usage](#usage)
 - [Test](#Test)
+- [Description](#description)
 
 ## Introduction
-Hash Generator is a one of the ...
+The hash algorithm is a one-way digest algorithm that can be utilized in various applications leveraging its features. The code provided implements a distinct hash algorithm that can be used to hash hexadecimal strings of less than 64 characters.
 
 ## Usage
 ```bash
