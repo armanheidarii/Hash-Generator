@@ -34,5 +34,7 @@ At the second level of abstraction, each Box component is composed of other comp
 
 
 At the third level of abstraction, each Round component is composed of a combination of XOR and modular addition of two halves of its 64-bit input, and ultimately, with the help of the <b>W</b> component, it can produce the output of the Round component.
-Additionally, the LastRound component is also composed of a permutation of the two halves of its 64-bit input using the XOR and addition operators.
+Additionally, the LastRound component is also composed of a permutation of the two halves of its 64-bit input using the XOR and modular addition operators.
 
+
+At the fourth level of abstraction, the W component also divides the input into 4 8-bit parts, and each part is passed to an S-box. The results of these S-boxes are combined using a permutation of XOR and modular addition operators, which ultimately constructs the output of the W component.
