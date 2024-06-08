@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(".")
 
-from hash_generator import HashGenerator, Sbox
+from pkg.hash_generator import HashGenerator, Sbox
 
 
 class Test:
